@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-9">
+        <div class="card shadow-sm mb-5 border-0">
+            <div class="card-body p-4">
+                <h2 class="card-title text-primary mb-1">{{ title.title }}</h2>
+                <h6 class="card-subtitle mb-3 text-muted">{{ title.type }} &middot; {{ title.release_year }}</h6>
+
+                <div class="mb-3">
+                    <p class="mb-1"><strong>Country:</strong> {{ title.country or 'N/A' }}</p>
+                    <p class="mb-1"><strong>Rating:</strong> {{ title.rating or 'N/A' }}</p>
+                    <p class="mb-1"><strong>Duration:</strong> {{ title.duration or 'N/A' }}</p>
+                    <p class="mb-1"><strong>Date Added:</strong> {{ title.date_added or 'N/A' }}</p>
+                </div>
+
+                <div class="mb-3">
+                    <strong>Genres:</strong>
+                    <div class="mt-1">
+                        {% for genre in title.genres %}
+                            <span class="badge bg-info text-dark me-1 mb-1">{{ genre.name }}</span>
+                        {% else %}
+                            <span class="text-muted">No genres listed.</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <p class="mb-1"><strong>Description:</strong></p>
+                    <p class="text-body">{{ title.description or 'No description available.' }}</p>
+                </div>
+
+                <a href="{{ url_for('index', page=1) }}" class="btn btn-outline-secondary mt-3">
+                    ← Back to List
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
