@@ -1,0 +1,5 @@
+* 1b8e4b6 : added a requirements file
+* 175efb8 : movie and tvshow posters now displaying
+* 85c1b32 : added title_details, styling
+* 628ece6 : Initial commit
+* e625b2b : project start
