@@ -47,5 +47,3 @@ Usage
 Testing
 •	Manually tested routes, error pages, pagination, and search.
 •	Verified correct linking of posters and genre associations.
-
-
