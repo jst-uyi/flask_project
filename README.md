@@ -20,7 +20,7 @@ Implementation
 4.	Error handling (404 pages) and template inheritance were implemented for maintainability.
 Installation
 Steps to install and run:
-1.	Clone the repository:
+1.	Clone the repository: (please select master branch)
    ```bash
 git clone https://github.com/jst-uyi/flask_project.git
 ```
