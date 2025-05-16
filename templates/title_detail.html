@@ -1,38 +1,64 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-lg-9">
-        <div class="card shadow-sm mb-5 border-0">
-            <div class="card-body p-4">
-                <h2 class="card-title text-primary mb-1">{{ title.title }}</h2>
-                <h6 class="card-subtitle mb-3 text-muted">{{ title.type }} &middot; {{ title.release_year }}</h6>
+<div class="detail-container">
+    <div class="detail-card">
+        <div class="detail-grid">
+            {% if title.poster_url %}
+            <div class="poster-col">
+                <img src="{{ title.poster_url }}"
+                     class="poster-image"
+                     alt="Poster for {{ title.title }}">
+            </div>
+            {% endif %}
 
-                <div class="mb-3">
-                    <p class="mb-1"><strong>Country:</strong> {{ title.country or 'N/A' }}</p>
-                    <p class="mb-1"><strong>Rating:</strong> {{ title.rating or 'N/A' }}</p>
-                    <p class="mb-1"><strong>Duration:</strong> {{ title.duration or 'N/A' }}</p>
-                    <p class="mb-1"><strong>Date Added:</strong> {{ title.date_added or 'N/A' }}</p>
-                </div>
-
-                <div class="mb-3">
-                    <strong>Genres:</strong>
-                    <div class="mt-1">
-                        {% for genre in title.genres %}
-                            <span class="badge bg-info text-dark me-1 mb-1">{{ genre.name }}</span>
-                        {% else %}
-                            <span class="text-muted">No genres listed.</span>
-                        {% endfor %}
+            <div class="info-col">
+                <div class="info-content">
+                    <h1 class="title">{{ title.title }}</h1>
+                    <div class="meta">
+                        <span class="type">{{ title.type }}</span>
+                        <span class="separator">•</span>
+                        <span class="year">{{ title.release_year }}</span>
                     </div>
-                </div>
 
-                <div class="mb-3">
-                    <p class="mb-1"><strong>Description:</strong></p>
-                    <p class="text-body">{{ title.description or 'No description available.' }}</p>
-                </div>
+                    <div class="details-section">
+                        <div class="detail-row">
+                            <span class="detail-label">Country:</span>
+                            <span class="detail-value">{{ title.country or 'N/A' }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Rating:</span>
+                            <span class="detail-value">{{ title.rating or 'N/A' }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Duration:</span>
+                            <span class="detail-value">{{ title.duration or 'N/A' }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Date Added:</span>
+                            <span class="detail-value">{{ title.date_added or 'N/A' }}</span>
+                        </div>
+                    </div>
 
-                <a href="{{ url_for('index', page=1) }}" class="btn btn-outline-secondary mt-3">
-                    ← Back to List
-                </a>
+                    <div class="genres-section">
+                        <h3 class="section-title">Genres</h3>
+                        <div class="genre-tags">
+                            {% for genre in title.genres %}
+                                <span class="genre-tag">{{ genre.name }}</span>
+                            {% else %}
+                                <span class="no-genres">No genres listed</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="description-section">
+                        <h3 class="section-title">Description</h3>
+                        <p class="description">{{ title.description or 'No description available.' }}</p>
+                    </div>
+
+                    <a href="{{ url_for('index', page=1) }}" class="back-button">
+                        ← Back to List
+                    </a>
+                </div>
             </div>
         </div>
     </div>

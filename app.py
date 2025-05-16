@@ -1,10 +1,14 @@
 from flask import Flask, render_template, abort, request
 from models import db, Title, Genre
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///hulu.db'
 app.config['SECRET_KEY'] = 'your_secret_key'
+
+# Initialize extensions
 db.init_app(app)
+migrate = Migrate(app, db)
 
 @app.route('/')
 @app.route('/page/<int:page>')
@@ -20,12 +24,10 @@ def search():
     per_page = 10
 
     if query:
-        # Search by title 
         results = Title.query.filter(Title.title.ilike(f'%{query}%'))
         pagination = results.paginate(page=page, per_page=per_page, error_out=False)
         return render_template('search_results.html', query=query, titles=pagination.items, pagination=pagination)
     else:
-        # If no query, redirect to main page or show all
         return render_template('search_results.html', query=query, titles=[], pagination=None)
 
 @app.route('/titles/<title_id>')

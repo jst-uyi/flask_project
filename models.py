@@ -12,6 +12,7 @@ class Title(db.Model):
     rating = db.Column(db.String)
     duration = db.Column(db.String)
     description = db.Column(db.String)
+    poster_url = db.Column(db.String)
     genres = db.relationship('Genre', secondary='title_genre', back_populates='titles')
 
 class Genre(db.Model):
